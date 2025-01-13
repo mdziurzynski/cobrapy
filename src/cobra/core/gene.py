@@ -222,6 +222,19 @@ class Gene(Species):
         self._functional = functional
 
     @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, new_id):
+        warnings.warn(
+            "Direct modification of gene.id is discouraged and may lead to gene duplications."
+            "Use cobra.manipulation.modify.rename_genes to safely rename genes.",
+            UserWarning
+        )
+        self._id = new_id
+    
+    @property
     def functional(self) -> bool:
         """Flag indicating if the gene is functional.
 
