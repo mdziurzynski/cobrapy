@@ -218,7 +218,7 @@ class Gene(Species):
         functional: bool
             A flag whether or not the gene is functional
         """
-        super().__init__(id=id, name=name)
+        super().__init__(_id=id, name=name)
         self._functional = functional
 
     @property
@@ -230,6 +230,19 @@ class Gene(Species):
         """
         return self._functional
 
+    @property
+    def id(self) -> str:
+        return self._id
+
+    @id.setter
+    def id(self, new_id) -> None:
+        warnings.warn(
+            "Direct modification of gene.id is discouraged. "
+            "Use cobra.manipulation.modify.rename_genes to safely rename genes.",
+            UserWarning
+        )
+        self._id = new_id
+    
     @functional.setter
     @resettable
     def functional(self, value: bool) -> None:
